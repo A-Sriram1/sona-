@@ -15,6 +15,7 @@ export interface Review {
 export interface Category {
   id: number;
   name: string;
+  slug?: string;
 }
 
 export interface Product {
@@ -30,6 +31,7 @@ export interface Product {
   weight?: number;
   thumbnail: string;
   category?: Category;
+  categoryId?: number;
   images?: ProductImage[];
   reviews?: Review[];
 }
