@@ -1,6 +1,11 @@
 import { Product, Category, AISummary, AnalyticsData } from './types';
 
-const API_BASE = 'http://127.0.0.1:8000/api/v1';
+// Use VITE_API_URL environment variable, defaulting to local backend for development
+let envUrl = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000/api/v1';
+if (envUrl && !envUrl.startsWith('http')) {
+  envUrl = `https://${envUrl}/api/v1`;
+}
+const API_BASE = envUrl;
 
 export async function fetchProducts(params: {
   skip?: number;

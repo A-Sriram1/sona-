@@ -1,0 +1,29 @@
+services:
+  # Backend FastAPI Service
+  - type: web
+    name: sona-backend
+    env: python
+    buildCommand: "cd backend && pip install -r requirements.txt"
+    startCommand: "cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: CORS_ORIGIN
+        value: "https://sona-frontend.onrender.com" # Allow frontend to access API
+
+  # Frontend React/Vite Service
+  - type: web
+    name: sona-frontend
+    env: static
+    buildCommand: "cd frontend && npm install && npm run build"
+    staticPublishPath: "./frontend/dist"
+    envVars:
+      - key: NODE_VERSION
+        value: 20.0.0
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: sona-backend
+          property: host
+          envVarKey: VITE_API_URL
+        # We must prefix it with https:// since Render passes the raw host
