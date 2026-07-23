@@ -1,0 +1,95 @@
+@import "tailwindcss";
+
+/* ─── Tailwind v4 Theme ─────────────────────────────────── */
+@theme {
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-heading: "Poppins", "Inter", sans-serif;
+
+  /* Colors */
+  --color-gold-DEFAULT: #F59E0B;
+  --color-gold-light: #FBBF24;
+  --color-gold-dark: #D97706;
+  --color-gold-glow: #FDE047;
+
+  --color-primary-DEFAULT: #DC2626;
+  --color-primary-hover: #B91C1C;
+  --color-primary-glow: #EF4444;
+
+  --color-darkbg-DEFAULT: #0F0709;
+  --color-darkbg-card: #180C0F;
+  --color-darkbg-border: #33161C;
+}
+
+/* ─── Base Styles ───────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Custom Utility Classes ────────────────────────────── */
+.font-heading {
+  font-family: var(--font-heading);
+}
+
+/* ─── Animations ────────────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes slideInRight {
+  from { transform: translateX(100%); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+@keyframes slideInBottom {
+  from { transform: translateY(40px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0px #F59E0B40; }
+  50%       { box-shadow: 0 0 24px #F59E0B80; }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+
+/* Replace Tailwind animate-in / slide-in utilities */
+.animate-in {
+  animation: fadeIn 0.3s ease both;
+}
+.fade-in {
+  animation: fadeIn 0.3s ease both;
+}
+.slide-in-from-right {
+  animation: slideInRight 0.3s ease both;
+}
+.slide-in-from-bottom {
+  animation: slideInBottom 0.4s ease both;
+}
+.duration-300 {
+  animation-duration: 0.3s;
+}
+
+/* Skeleton shimmer */
+.animate-shimmer {
+  background: linear-gradient(90deg, #1e293b 25%, #334155 50%, #1e293b 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* ─── Scrollbar ─────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #334155; border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: #F59E0B; }
